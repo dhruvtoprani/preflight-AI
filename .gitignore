@@ -26,3 +26,6 @@ htmlcov/
 .mypy_cache/
 .vercel
 .env*.local
+
+# Local artifacts
+.tmp/
