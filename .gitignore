@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.venv/
+
+# Node
+node_modules/
+.next/
+dist/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# OS/Editors
+.DS_Store
+.vscode/
+.idea/
+
+# Build/Test
+.coverage
+htmlcov/
+.mypy_cache/
+.vercel
+.env*.local

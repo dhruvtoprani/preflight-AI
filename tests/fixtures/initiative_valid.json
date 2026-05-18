@@ -1,0 +1,12 @@
+{
+  "title": "Automated pet health alerts",
+  "problem_statement": "Users often miss early warning signals that could indicate pet health changes, leading to delayed care.",
+  "proposed_solution": "Introduce proactive mobile alerts based on telemetry-derived thresholds and trends.",
+  "target_timeline": "End of Q3 2026",
+  "affected_teams": ["engineering", "qa", "support"],
+  "success_metric": "Reduce support tickets tied to missed alerts by 25%",
+  "known_constraints": ["Telemetry schema freeze in August"],
+  "requester": "pm@example.com",
+  "channel_id": "C12345678",
+  "thread_ts": "1710000000.000100"
+}

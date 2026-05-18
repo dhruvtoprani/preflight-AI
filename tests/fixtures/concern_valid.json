@@ -1,0 +1,15 @@
+{
+  "team": "qa",
+  "statement": "Regression coverage is incomplete for notification preference and onboarding paths.",
+  "confidence": 0.82,
+  "evidence_status": "evidence-backed",
+  "evidence": [
+    {
+      "source_type": "release_notes",
+      "source_id": "q2-release-checklist",
+      "excerpt": "Two prior regressions were tied to notification preference migration."
+    }
+  ],
+  "blockers": ["Estimate test matrix"],
+  "questions": ["What is minimum beta test coverage?"]
+}

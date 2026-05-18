@@ -1,0 +1,44 @@
+{
+  "evidence_backed_ratio": 0.1667,
+  "readiness_counts": {
+    "green": 0,
+    "red": 2,
+    "yellow": 1
+  },
+  "runs": [
+    {
+      "concern_count": 4,
+      "elapsed_ms": 1,
+      "evidence_backed_count": 1,
+      "overall_readiness": "red",
+      "run_id": "cb6428f3-29a5-4c0c-81ed-e469c81ff37f",
+      "team_count": 4,
+      "title": "Automated pet health alerts",
+      "warning_count": 0
+    },
+    {
+      "concern_count": 4,
+      "elapsed_ms": 0,
+      "evidence_backed_count": 1,
+      "overall_readiness": "red",
+      "run_id": "45817895-12fb-4e21-be8c-0cffd5148303",
+      "team_count": 4,
+      "title": "Release timeline compression",
+      "warning_count": 0
+    },
+    {
+      "concern_count": 4,
+      "elapsed_ms": 0,
+      "evidence_backed_count": 0,
+      "overall_readiness": "yellow",
+      "run_id": "7b96a0d4-8e12-4956-8757-40840bbe7864",
+      "team_count": 4,
+      "title": "Cross-functional migration kickoff",
+      "warning_count": 0
+    }
+  ],
+  "scenario_count": 3,
+  "total_concerns": 12,
+  "total_elapsed_ms": 3,
+  "total_evidence_backed": 2
+}

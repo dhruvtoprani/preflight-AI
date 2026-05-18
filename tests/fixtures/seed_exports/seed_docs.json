@@ -1,0 +1,26 @@
+[
+  {
+    "source_id": "JIRA-123",
+    "source_type": "jira",
+    "title": "Notification API ownership",
+    "body": "The notification API ownership is currently unresolved between mobile platform and backend platform teams.",
+    "team_scope": ["engineering", "tpm"],
+    "tags": ["api", "ownership", "dependency"]
+  },
+  {
+    "source_id": "CONF-77",
+    "source_type": "confluence",
+    "title": "QA regression checklist",
+    "body": "Regression checklist indicates prior failures on notification preferences and onboarding edge cases.",
+    "team_scope": ["qa"],
+    "tags": ["regression", "qa", "notifications"]
+  },
+  {
+    "source_id": "ROADMAP-Q3",
+    "source_type": "roadmap",
+    "title": "Q3 launch milestones",
+    "body": "Q3 includes discovery, beta, and GA gates for pet health alerts and support readiness.",
+    "team_scope": ["all"],
+    "tags": ["timeline", "launch", "beta"]
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "team": "qa",
+  "statement": "Regression risk is high for notification settings migration.",
+  "confidence": 0.78,
+  "evidence_status": "evidence-backed",
+  "evidence": [],
+  "blockers": ["Estimate test matrix"],
+  "questions": ["What beta coverage is required?"]
+}
