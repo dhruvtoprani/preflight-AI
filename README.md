@@ -1,33 +1,79 @@
 # PreFlight
 
+## Product Summary
 **PreFlight is a Slack-native stakeholder context engine for PMs and TPMs.**
 
-Before pulling six teams into a kickoff, a PM can drop an initiative brief in Slack and get an async multi-lens review across Engineering, QA, Design, Support, GTM, Security/Privacy, and TPM.
+It helps teams pressure-test initiatives before kickoff by running async multi-agent reviews grounded in role-scoped context from internal systems, including **Jira and Confluence**.
 
-## Why This Is Useful
-- Cuts pre-kickoff context gathering from hours to minutes.
-- Surfaces blockers and cross-team dependencies early.
-- Produces a kickoff-ready agenda and ownership map.
-- Keeps humans focused on judgment, not scavenger-hunt discovery.
+## Problem
+Kickoff quality is often low because PMs and TPMs spend too much time collecting fragmented context across teams.
 
-## What It Does Today
-1. Accepts structured initiative briefs from Slack.
-2. Runs role-based agent reviews (deterministic or LLM-backed).
-3. Returns team concerns with evidence labels:
-- `evidence-backed`
-- `inferred`
-- `needs confirmation`
-4. Synthesizes overall readiness (`green/yellow/red`) plus blockers, questions, and next actions.
-5. Persists runs and exposes run history + dashboard drilldown.
+Common failure mode:
+1. The first meeting is used to discover basic blockers.
+2. Dependencies are surfaced late.
+3. Timeline risk appears after alignment has already started.
 
-## End User Workflow
-1. PM submits brief in Slack thread.
-2. PreFlight runs multi-team review asynchronously.
-3. Thread receives readiness summary and critical gaps.
-4. PM walks into first discussion with a concrete, scoped agenda.
+## Outcome
+PreFlight gives PM/TPM teams **pre-meeting alignment intelligence**:
+- Readiness signal (`green/yellow/red`)
+- Team-specific risks and blockers
+- Questions to resolve before kickoff
+- Suggested owner map + first-meeting agenda
 
-## Structured Slack Input
-Use this format:
+## Users
+- Primary: PMs, TPMs
+- Secondary: Engineering managers, QA leads, Design leads, Support leads, GTM, Security/Privacy
+
+## Core Workflow
+1. PM submits a structured initiative brief in Slack.
+2. PreFlight runs role-based team reviews in parallel.
+3. A moderator synthesizes concerns and recommends next actions.
+4. PM enters kickoff with concrete risks, owners, and sequencing questions.
+
+## MVP Scope (Implemented)
+- Slack intake (`/slack/command` + events) with strict structured validation.
+- Multi-agent orchestration:
+  - deterministic fallback mode
+  - LLM-driven mode
+- Team-scoped retrieval and prompt policies.
+- Evidence labels per concern:
+  - `evidence-backed`
+  - `inferred`
+  - `needs confirmation`
+- Run persistence + history APIs + dashboard drilldown.
+
+## Team Lenses + Jira/Confluence Integration
+PreFlight supports the following role lenses:
+- `engineering`
+- `qa`
+- `design`
+- `support`
+- `gtm`
+- `security_privacy`
+- `tpm`
+
+Each team lens is configured with scoped context policy (`focus_areas`, `preferred_sources`, `retrieval_hints`).
+
+**Jira + Confluence integration is available and used as first-class context sources** for team reviews (with per-team source preferences). Example policy directions:
+- Engineering: Jira + Confluence + architecture/roadmap context
+- QA: Jira + Confluence + release/bug context
+- Support: Jira + Confluence + support/help context
+- TPM: Jira + Confluence + roadmap/release-calendar context
+
+## Integrations
+### Live connectors (implemented)
+- Jira API ingestion
+- Confluence API ingestion
+- Checkpointed sync for incremental updates
+
+### Seed / dump path (implemented)
+- Local JSON exports for rapid pilot setup and demos
+
+### Additional sources (planned/expandable)
+- Google Drive, support tooling, release calendars, additional knowledge systems
+
+## Slack Brief Format
+Use this shape:
 
 ```text
 title: ...
@@ -41,9 +87,9 @@ constraints: ...
 
 Team notes:
 - Canonical teams: `engineering, qa, design, support, gtm, security_privacy, tpm`
-- Alias mapping supported: `security/privacy`, `security`, `privacy`, `sec` -> `security_privacy`
+- Supported aliases: `security/privacy`, `security`, `privacy`, `sec` -> `security_privacy`
 
-## Quick Start (Local)
+## Local Run
 1. `make dev-up`
 2. `make check-persistence`
 3. `make run-local-stack`
@@ -53,19 +99,19 @@ Team notes:
 Optional pilot signoff gate:
 - `EVAL_MIN_EVIDENCE_RATIO=0.30 make eval-pilot`
 
-## Repo Layout
-- `apps/slack-bot`: Slack command/events intake + thread delivery.
-- `apps/dashboard`: Run history overview + drilldown UI.
-- `services/orchestrator`: Team review execution, synthesis, run APIs.
-- `services/ingestion`: Document ingestion/index pipeline.
-- `services/retrieval`: Context retrieval APIs.
-- `packages/schemas`: Shared contracts.
-- `packages/agent-prompts`: Team/moderator prompt templates.
-- `docs`: Product, architecture, and delivery docs.
-
 ## Security Defaults
-- `/runs*` APIs can require bearer token via `PREFLIGHT_HISTORY_API_TOKEN`.
-- Run-history responses are redacted by default.
+- `/runs*` endpoints can be token-protected via `PREFLIGHT_HISTORY_API_TOKEN`.
+- Run-history payloads are redacted by default.
 
-## MVP Positioning
-PreFlight is **pre-meeting alignment intelligence**: a practical way for PM/TPM teams to pressure-test initiatives before kickoff and reduce coordination waste.
+## Repository Layout
+- `apps/slack-bot`: Slack interaction + response delivery
+- `apps/dashboard`: run history + drilldown UI
+- `services/orchestrator`: orchestration + moderation + run APIs
+- `services/ingestion`: Jira/Confluence/seed ingestion pipeline
+- `services/retrieval`: context retrieval service
+- `packages/schemas`: shared contracts
+- `packages/agent-prompts`: role prompt templates
+- `docs`: architecture, scope, action items
+
+## Product Positioning
+PreFlight reduces low-value discovery work and helps teams spend human time on judgment, tradeoffs, and decisions.

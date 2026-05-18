@@ -566,3 +566,11 @@ Validation:
 - Tightened packaging docs for launch narrative:
   - Rewrote `README.md` with PM-facing value framing, workflow, and pilot-gate command usage.
   - Updated `docs/ACTION_ITEMS.md` to mark Batch N complete and queue lean Batch O.
+
+### 2026-05-18 - README PRD Style Upgrade (User Request)
+- Rewrote `README.md` with sharper PRD-style framing:
+  - product summary, problem, users, workflow, MVP scope, outcomes
+  - explicit integrations section for live Jira + Confluence connectors
+  - explicit note that team lenses use scoped policy and source preferences
+  - included canonical team names and alias mapping in Slack brief format
+- Preserved quick-start and security defaults while improving positioning language for PM/TPM value narrative.
