@@ -574,3 +574,18 @@ Validation:
   - explicit note that team lenses use scoped policy and source preferences
   - included canonical team names and alias mapping in Slack brief format
 - Preserved quick-start and security defaults while improving positioning language for PM/TPM value narrative.
+
+### 2026-05-18 - README Story Upgrade from ProjectIdeas PDF
+- Parsed `/Users/dhruvtoprani/Downloads/ProjectIdeas_Toprani.pdf` and used it to rewrite README with stronger PM/TPM product narrative.
+- README now includes:
+  - PRD snapshot (users, job, output)
+  - clear problem -> thesis -> workflow story
+  - team-lens section explicitly covering Jira + Confluence integration by stakeholder lens
+  - end-to-end technical architecture and full stack layering
+  - Mermaid sequence and architecture diagrams where helpful
+  - pilot success criteria and positioning language for portfolio/interview usage.
+
+### 2026-05-18 - README Concision + Emphasis Pass
+- Tightened README language to be more direct and concise.
+- Added stronger bold emphasis on high-signal product terms (problem, outcome, readiness, stack layers).
+- Preserved PRD structure, Jira/Confluence integration narrative, and diagrams while reducing verbosity.
