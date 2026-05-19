@@ -1,5 +1,7 @@
 # PreFlight
 
+> **Turn kickoff chaos into decision-ready alignment.** PreFlight is a Slack-native AI stakeholder intelligence layer that pressure-tests initiatives before the first meeting by mapping risks, blockers, owners, and sequencing questions from Jira, Confluence, and team context.
+
 **AI stakeholder intelligence for PM and TPM kickoff readiness.**
 
 PreFlight is a Slack based AI workflow system that helps Product Managers and Technical Program Managers pressure test initiatives before kickoff.
