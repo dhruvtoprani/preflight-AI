@@ -1,14 +1,19 @@
-# PreFlight
+# PreFlight AI
+
+[![Product](https://img.shields.io/badge/Product-Kickoff_Readiness-C7FF3D?style=for-the-badge)](https://github.com/dhruvtoprani/preflight-AI)
+[![AI](https://img.shields.io/badge/AI-Role_Based_Stakeholder_Review-7C5CFF?style=for-the-badge)](https://github.com/dhruvtoprani/preflight-AI#ai-and-orchestration)
+[![Backend](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Integrations](https://img.shields.io/badge/Integrations-Slack_%2B_Jira_%2B_Confluence-FF6B3D?style=for-the-badge)](https://github.com/dhruvtoprani/preflight-AI#integrations)
 
 > **Turn kickoff chaos into decision-ready alignment.** PreFlight is a Slack-native AI stakeholder intelligence layer that pressure-tests initiatives before the first meeting by mapping risks, blockers, owners, and sequencing questions from Jira, Confluence, and team context.
 
-**AI stakeholder intelligence for PM and TPM kickoff readiness.**
+PreFlight is a Slack-based AI workflow system that helps Product Managers and Technical Program Managers pressure-test initiatives before kickoff.
 
-PreFlight is a Slack based AI workflow system that helps Product Managers and Technical Program Managers pressure test initiatives before kickoff.
-
-A PM submits a structured initiative brief in Slack. PreFlight reviews the initiative through role based stakeholder lenses, retrieves relevant Jira and Confluence context, labels concerns by evidence quality, and returns a readiness report with risks, blockers, owners, unresolved questions, and a first meeting agenda.
+A PM submits a structured initiative brief in Slack. PreFlight reviews the initiative through role-based stakeholder lenses, retrieves relevant Jira and Confluence context, labels concerns by evidence quality, and returns a readiness report with risks, blockers, owners, unresolved questions, and a first meeting agenda.
 
 The goal is simple: help teams spend kickoff meetings making decisions instead of discovering obvious context.
+
+**Links:** [Source repository](https://github.com/dhruvtoprani/preflight-AI) · [System workflow](#system-workflow) · [Architecture](#architecture) · [Implemented MVP](#implemented-mvp) · [Local run](#local-run) · [Product signals](#product-management-signals-demonstrated)
 
 ---
 
@@ -16,7 +21,7 @@ The goal is simple: help teams spend kickoff meetings making decisions instead o
 
 Kickoff meetings often fail before they start.
 
-PMs and TPMs are expected to walk into cross functional discussions with context from engineering, QA, design, support, GTM, security, privacy, roadmaps, release plans, Jira issues, and Confluence docs. That context usually lives across fragmented systems and people.
+PMs and TPMs are expected to walk into cross-functional discussions with context from engineering, QA, design, support, GTM, security, privacy, roadmaps, release plans, Jira issues, and Confluence docs. That context usually lives across fragmented systems and people.
 
 Common failure modes:
 
@@ -26,7 +31,7 @@ Common failure modes:
 - QA, support, GTM, or privacy risks are missed until close to launch
 - The first meeting becomes a discovery session instead of a decision session
 
-PreFlight is designed as a pre kickoff intelligence layer for product execution.
+PreFlight is designed as a pre-kickoff intelligence layer for product execution.
 
 ---
 
@@ -38,7 +43,7 @@ Engineering evaluates feasibility and ownership. QA evaluates regression risk an
 
 PreFlight turns those perspectives into a structured AI review workflow.
 
-It is not a generic chatbot. It is an AI assisted stakeholder review system built around real PM and TPM execution patterns.
+It is not a generic chatbot. It is an AI-assisted stakeholder review system built around real PM and TPM execution patterns.
 
 ---
 
@@ -47,7 +52,7 @@ It is not a generic chatbot. It is an AI assisted stakeholder review system buil
 PreFlight produces a structured readiness report before kickoff:
 
 - Readiness status: `green`, `yellow`, or `red`
-- Team specific risks and blockers
+- Team-specific risks and blockers
 - Evidence labels for every concern
 - Questions to resolve before kickoff
 - Suggested owner map
@@ -186,19 +191,19 @@ flowchart LR
 
 ### AI and Orchestration
 
-- Role based multi agent review flow
+- Role-based multi-agent review flow
 - Team lenses for engineering, QA, design, support, GTM, security/privacy, and TPM
 - Deterministic fallback mode for local demos and tests
-- LLM driven mode using OpenAI Chat Completions
+- LLM-driven mode using OpenAI Chat Completions
 - Moderator synthesis for unified readiness output
 - Timeout, retry, and fallback handling
 
 ### Retrieval and Context
 
-- Team scoped retrieval with source visibility filtering
-- Lightweight token overlap ranking over indexed context
+- Team-scoped retrieval with source visibility filtering
+- Lightweight token-overlap ranking over indexed context
 - Evidence excerpts attached to concerns
-- Source normalized context model for Jira, Confluence, and seed docs
+- Source-normalized context model for Jira, Confluence, and seed docs
 
 ### Integrations
 
@@ -213,7 +218,7 @@ flowchart LR
 - Run persistence with history APIs
 - Dashboard aggregate endpoint
 - Redacted run history by default
-- Optional bearer token protection for history APIs through `PREFLIGHT_HISTORY_API_TOKEN`
+- Optional bearer-token protection for history APIs through `PREFLIGHT_HISTORY_API_TOKEN`
 - Observability events for review runs
 
 ### Dev and Evaluation
@@ -231,9 +236,9 @@ flowchart LR
 - **Schemas:** Pydantic
 - **AI:** OpenAI Chat Completions API, prompt policies, deterministic fallback runner
 - **Integrations:** Slack, Jira API, Confluence API
-- **Retrieval:** Team scoped JSONL index with token overlap ranking
-- **Persistence:** Postgres capable run store with file fallback
-- **Dashboard:** FastAPI served web UI
+- **Retrieval:** Team-scoped JSONL index with token-overlap ranking
+- **Persistence:** Postgres-capable run store with file fallback
+- **Dashboard:** FastAPI-served web UI
 - **DevOps:** Makefile workflows, local stack scripts, unittest
 
 ---
@@ -264,13 +269,13 @@ apps/
   dashboard/        Run history UI and dashboard APIs
 
 services/
-  orchestrator/     Multi agent execution, moderation, run APIs
-  retrieval/        Team scoped context retrieval
+  orchestrator/     Multi-agent execution, moderation, run APIs
+  retrieval/        Team-scoped context retrieval
   ingestion/        Jira, Confluence, seed ingestion, and sync
 
 packages/
   schemas/          Shared contracts for briefs, reviews, evidence, and runs
-  agent-prompts/    Role specific prompt templates and team policies
+  agent-prompts/    Role-specific prompt templates and team policies
 
 docs/               Architecture notes, scope, action items, and runbooks
 scripts/            Local development, seeding, sync, and pilot evaluation
@@ -280,13 +285,13 @@ scripts/            Local development, seeding, sync, and pilot evaluation
 
 ## Why This Matters for Product Teams
 
-PreFlight targets a real operating problem: the cost of low quality kickoff preparation.
+PreFlight targets a real operating problem: the cost of low-quality kickoff preparation.
 
 For PMs, it reduces manual context gathering and surfaces sharper stakeholder questions.
 
 For TPMs, it highlights sequencing risk, unclear ownership, and launch readiness gaps.
 
-For cross functional teams, it turns kickoff from a discovery meeting into a decision meeting.
+For cross-functional teams, it turns kickoff from a discovery meeting into a decision meeting.
 
 ---
 
@@ -295,9 +300,9 @@ For cross functional teams, it turns kickoff from a discovery meeting into a dec
 This project demonstrates:
 
 - Identifying a real PM and TPM workflow pain point
-- Scoping an AI native MVP around a narrow user job
+- Scoping an AI-native MVP around a narrow user job
 - Designing structured intake and output workflows
-- Modeling cross functional stakeholder perspectives
+- Modeling cross-functional stakeholder perspectives
 - Balancing LLM reasoning with evidence labeling and validation
 - Integrating AI into existing enterprise tools instead of creating another destination app
 - Building evaluation hooks for output quality and evidence coverage
@@ -309,15 +314,15 @@ This project demonstrates:
 
 **Product Management:**
 
-> Built PreFlight, a Slack based AI stakeholder intelligence tool that helps PMs and TPMs pressure test initiatives before kickoff using Jira, Confluence, role based agents, and evidence labeled readiness reports.
+> Built PreFlight, a Slack-based AI stakeholder intelligence tool that helps PMs and TPMs pressure-test initiatives before kickoff using Jira, Confluence, role-based agents, and evidence-labeled readiness reports.
 
 **Technical Product Management:**
 
-> Architected an AI assisted TPM workflow across Slack intake, Jira/Confluence ingestion, scoped retrieval, multi agent orchestration, moderator synthesis, run persistence, redacted history APIs, and dashboard drilldown.
+> Architected an AI-assisted TPM workflow across Slack intake, Jira/Confluence ingestion, scoped retrieval, multi-agent orchestration, moderator synthesis, run persistence, redacted history APIs, and dashboard drilldown.
 
 **AI Product:**
 
-> Designed an evidence aware multi agent review system that separates source backed blockers from inferred risks and unresolved questions to improve trust in AI generated product recommendations.
+> Designed an evidence-aware multi-agent review system that separates source-backed blockers from inferred risks and unresolved questions to improve trust in AI-generated product recommendations.
 
 ---
 
@@ -325,7 +330,7 @@ This project demonstrates:
 
 PreFlight is implemented as a local MVP and public portfolio project.
 
-It includes Slack intake, structured validation, role based stakeholder reviews, LLM and deterministic review modes, Jira and Confluence ingestion, scoped retrieval, evidence labeling, run persistence, dashboard drilldown, and pilot evaluation support.
+It includes Slack intake, structured validation, role-based stakeholder reviews, LLM and deterministic review modes, Jira and Confluence ingestion, scoped retrieval, evidence labeling, run persistence, dashboard drilldown, and pilot evaluation support.
 
 Future upgrades could include semantic vector retrieval, richer permission mapping, production Slack OAuth, deeper Jira dependency graph analysis, support tool ingestion, and real team pilot feedback loops.
 
