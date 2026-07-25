@@ -34,7 +34,24 @@ def _build_excerpt(body: str, token_hint: str | None, max_chars: int = 220) -> s
 
     start = max(0, index - 50)
     end = min(len(body), index + 170)
-    return body[start:end].strip()
+    trimmed_start = start > 0
+    trimmed_end = end < len(body)
+
+    if trimmed_start:
+        next_space = body.find(" ", start)
+        if 0 <= next_space < index:
+            start = next_space + 1
+    if trimmed_end:
+        previous_space = body.rfind(" ", start, end)
+        if previous_space > index:
+            end = previous_space
+
+    excerpt = body[start:end].strip()
+    if trimmed_start:
+        excerpt = f"... {excerpt}"
+    if trimmed_end:
+        excerpt = f"{excerpt} ..."
+    return excerpt
 
 
 def retrieve_context(

@@ -1,0 +1,10 @@
+{
+  "title": "Automated pet health alerts",
+  "problem_statement": "Users miss early warning signals for potential pet health changes.",
+  "proposed_solution": "Generate proactive mobile alerts from health telemetry trend changes with clear severity thresholds.",
+  "target_timeline": "Q3",
+  "affected_teams": ["engineering", "qa", "support", "tpm"],
+  "success_metric": "Reduce time-to-notice by 30%",
+  "known_constraints": ["Telemetry schema freeze in August"],
+  "requester": "pilot-pm-1"
+}

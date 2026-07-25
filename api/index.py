@@ -12,9 +12,11 @@ for rel_path in [
     "services/orchestrator/src",
     "services/ingestion/src",
     "services/retrieval/src",
+    "apps/slack-bot/src",
+    "apps/dashboard/src",
 ]:
     abs_path = ROOT / rel_path
     if abs_path.exists():
         sys.path.insert(0, str(abs_path))
 
-from orchestrator.main import app  # noqa: E402
+from dashboard_app.main import app  # noqa: E402

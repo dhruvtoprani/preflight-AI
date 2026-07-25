@@ -53,19 +53,63 @@ class AgentRunner(Protocol):
         """Return role-scoped team reviews and execution warnings."""
 
 
+def _brief_query_context(brief: InitiativeBrief | None) -> str:
+    if brief is None:
+        return ""
+    return " ".join(
+        [
+            brief.title,
+            brief.problem_statement,
+            brief.proposed_solution,
+            brief.target_timeline,
+            brief.success_metric,
+            " ".join(brief.known_constraints),
+        ]
+    )
+
+
+def _retrieve_evidence(
+    team: str,
+    brief: InitiativeBrief | None,
+    query: str,
+    fallback: list[EvidenceReference] | None = None,
+) -> list[EvidenceReference]:
+    snippets = retrieve_context(
+        team=team,
+        query=f"{_brief_query_context(brief)} {query}".strip(),
+        max_results=2,
+    )
+    if snippets:
+        return [
+            EvidenceReference(
+                source_type=snippet.source_type,
+                source_id=snippet.source_id,
+                excerpt=snippet.excerpt,
+            )
+            for snippet in snippets
+        ]
+    return list(fallback or [])
+
+
 def _engineering_review(brief: InitiativeBrief) -> AgentReview:
-    eng_concern = Concern(
+    evidence = _retrieve_evidence(
         team="engineering",
-        statement="API ownership is not yet explicit for mobile notification workflows.",
-        confidence=0.76,
-        evidence_status=EvidenceStatus.INFERRED,
-        evidence=[
+        brief=brief,
+        query="API ownership notification workflow dependency mobile backend",
+        fallback=[
             EvidenceReference(
                 source_type="roadmap",
                 source_id="Q3-Mobile-Roadmap",
                 excerpt="Notification API contract milestone listed without owner.",
             )
         ],
+    )
+    eng_concern = Concern(
+        team="engineering",
+        statement="API ownership is not yet explicit for mobile notification workflows.",
+        confidence=0.76,
+        evidence_status=EvidenceStatus.EVIDENCE_BACKED,
+        evidence=evidence,
         blockers=["Assign API owner"],
         questions=["Which team owns API contract and rollout sequencing?"],
     )
@@ -77,18 +121,24 @@ def _engineering_review(brief: InitiativeBrief) -> AgentReview:
 
 
 def _qa_review(brief: InitiativeBrief) -> AgentReview:
-    qa_concern = Concern(
+    evidence = _retrieve_evidence(
         team="qa",
-        statement="Regression risk exists across notification settings and onboarding flows.",
-        confidence=0.82,
-        evidence_status=EvidenceStatus.EVIDENCE_BACKED,
-        evidence=[
+        brief=brief,
+        query="QA regression checklist notification preferences onboarding edge cases capacity",
+        fallback=[
             EvidenceReference(
                 source_type="release_notes",
                 source_id="Q2-Release-Checklist",
                 excerpt="Two prior regressions linked to notification preference migration.",
             )
         ],
+    )
+    qa_concern = Concern(
+        team="qa",
+        statement="Regression risk exists across notification settings and onboarding flows.",
+        confidence=0.82,
+        evidence_status=EvidenceStatus.EVIDENCE_BACKED,
+        evidence=evidence,
         blockers=["Estimate test matrix"],
         questions=["Do we have dedicated QA capacity for multi-pet edge cases?"],
     )
@@ -104,14 +154,21 @@ def _deterministic_generic_review(
     statement: str,
     question: str,
     blocker: str | None = None,
+    brief: InitiativeBrief | None = None,
+    query: str = "",
 ) -> AgentReview:
     blockers = [blocker] if blocker else []
+    evidence = _retrieve_evidence(team=team, brief=brief, query=query or statement)
+    evidence_status = (
+        EvidenceStatus.EVIDENCE_BACKED if evidence else EvidenceStatus.INFERRED
+    )
+    confidence = 0.74 if evidence else 0.64
     concern = Concern(
         team=team,
         statement=statement,
-        confidence=0.64,
-        evidence_status=EvidenceStatus.INFERRED,
-        evidence=[],
+        confidence=confidence,
+        evidence_status=evidence_status,
+        evidence=evidence,
         blockers=blockers,
         questions=[question],
     )
@@ -123,6 +180,8 @@ def _design_review(brief: InitiativeBrief) -> AgentReview:
         team="design",
         statement="Primary user flow and edge-case states are not yet fully defined for kickoff.",
         question="What design states and copy variants are required for beta scope?",
+        brief=brief,
+        query="design user flow edge case beta copy variants UX states",
     )
 
 
@@ -132,6 +191,8 @@ def _support_review(brief: InitiativeBrief) -> AgentReview:
         statement="Support readiness is unclear for expected user confusion and escalation handling.",
         question="Who owns help-center updates and escalation playbooks before launch?",
         blocker="Assign support-readiness owner",
+        brief=brief,
+        query="support readiness help center escalation playbook launch user confusion",
     )
 
 
@@ -140,6 +201,8 @@ def _gtm_review(brief: InitiativeBrief) -> AgentReview:
         team="gtm",
         statement="GTM timeline and launch messaging dependencies are not fully aligned.",
         question="Which launch milestones and messaging approvals gate release readiness?",
+        brief=brief,
+        query="GTM launch messaging approvals timeline dependencies beta GA",
     )
 
 
@@ -149,6 +212,8 @@ def _security_privacy_review(brief: InitiativeBrief) -> AgentReview:
         statement="Security/privacy review scope remains undefined for this initiative.",
         question="What data-access and compliance checks must clear before kickoff approval?",
         blocker="Scope security/privacy review",
+        brief=brief,
+        query="security privacy data access compliance review permissions telemetry migration",
     )
 
 
@@ -158,6 +223,8 @@ def _tpm_review(brief: InitiativeBrief) -> AgentReview:
         statement="Cross-team sequencing and ownership map are incomplete for kickoff quality.",
         question="Can we confirm owners, milestones, and dependency order for kickoff?",
         blocker="Finalize owner/dependency map",
+        brief=brief,
+        query="TPM dependency map owner sequencing timeline milestone kickoff migration",
     )
 
 

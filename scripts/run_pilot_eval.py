@@ -23,40 +23,19 @@ for src_path in reversed(SRC_PATHS):
 from orchestrator.main import review  # noqa: E402
 from preflight_schemas import InitiativeBrief  # noqa: E402
 
+DEMO_BRIEF_DIR = ROOT / "docs" / "pilot" / "demo_briefs"
+
 
 def _scenarios() -> list[InitiativeBrief]:
-    return [
-        InitiativeBrief(
-            title="Automated pet health alerts",
-            problem_statement="Users miss early warning signals for potential pet health changes.",
-            proposed_solution="Generate proactive mobile alerts from health telemetry trend changes with clear severity thresholds.",
-            target_timeline="Q3",
-            affected_teams=["engineering", "qa", "support", "tpm"],
-            success_metric="Reduce time-to-notice by 30%",
-            known_constraints=["Telemetry schema freeze in August"],
-            requester="pilot-pm-1",
-        ),
-        InitiativeBrief(
-            title="Release timeline compression",
-            problem_statement="A strategic launch date moved earlier and current sequencing likely cannot support the new date.",
-            proposed_solution="Re-scope beta and GA milestones and reduce non-critical dependencies for initial release.",
-            target_timeline="6 weeks",
-            affected_teams=["engineering", "qa", "gtm", "tpm"],
-            success_metric="Ship beta by revised launch date with no Sev1 defects",
-            known_constraints=["QA capacity fixed for current sprint"],
-            requester="pilot-pm-2",
-        ),
-        InitiativeBrief(
-            title="Cross-functional migration kickoff",
-            problem_statement="Legacy service ownership is fragmented and migration plans are repeatedly blocked by unclear dependency maps.",
-            proposed_solution="Create phased migration with explicit ownership per subsystem and weekly cross-team checkpoints.",
-            target_timeline="Q4",
-            affected_teams=["engineering", "security_privacy", "support", "tpm"],
-            success_metric="Migrate 80% of traffic with no critical incidents",
-            known_constraints=["Support escalation playbook not yet updated"],
-            requester="pilot-pm-3",
-        ),
-    ]
+    scenario_paths = sorted(DEMO_BRIEF_DIR.glob("*.json"))
+    if not scenario_paths:
+        raise FileNotFoundError(f"No demo briefs found in {DEMO_BRIEF_DIR}")
+
+    scenarios: list[InitiativeBrief] = []
+    for scenario_path in scenario_paths:
+        payload = json.loads(scenario_path.read_text(encoding="utf-8"))
+        scenarios.append(InitiativeBrief.model_validate(payload))
+    return scenarios
 
 
 def _concern_metrics(run) -> tuple[int, int]:

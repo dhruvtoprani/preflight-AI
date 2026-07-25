@@ -261,6 +261,22 @@ EVAL_MIN_EVIDENCE_RATIO=0.30 make eval-pilot
 
 ---
 
+## Live Demo
+
+- Preview: `https://preflight-health-5eurqttnm-dhruv-kekin-topranis-projects.vercel.app`
+- Local Slack-channel demo: `http://localhost:8002/` after `make run-dashboard`
+- Demo API: `http://localhost:8002/api/demo`
+- Seed/sample context: `data/seed_exports/pilot_context.json`
+
+Pilot launch materials:
+
+- PM rollout runbook: `docs/PILOT_RUNBOOK.md`
+- Baseline metrics capture: `docs/PILOT_BASELINE_METRICS.md`
+- Canned demo briefs: `docs/pilot/demo_briefs/`
+- Expected demo snapshots: `docs/pilot/EXPECTED_OUTCOMES.md`
+
+---
+
 ## Repository Layout
 
 ```text

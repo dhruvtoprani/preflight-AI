@@ -10,6 +10,8 @@ def _title_case(team: str) -> str:
         return "GTM"
     if team.lower() == "tpm":
         return "TPM"
+    if team.lower() == "security_privacy":
+        return "Security/Privacy"
     return team.title()
 
 

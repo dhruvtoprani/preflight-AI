@@ -1,0 +1,122 @@
+[
+  {
+    "source_id": "JIRA-123",
+    "source_type": "jira",
+    "title": "Notification API ownership",
+    "body": "The notification API ownership is currently unresolved between mobile platform and backend platform teams. The kickoff needs a named API contract owner before mobile alert implementation starts.",
+    "team_scope": ["engineering", "tpm"],
+    "tags": ["api", "ownership", "dependency", "notifications"]
+  },
+  {
+    "source_id": "CONF-QA-77",
+    "source_type": "confluence",
+    "title": "Notification QA regression checklist",
+    "body": "Regression checklist indicates prior failures on notification preferences, onboarding edge cases, multi-pet account switching, and push permission recovery flows.",
+    "team_scope": ["qa"],
+    "tags": ["regression", "qa", "notifications", "onboarding"]
+  },
+  {
+    "source_id": "ROADMAP-Q3",
+    "source_type": "roadmap",
+    "title": "Q3 launch milestones",
+    "body": "Q3 includes discovery, beta, and GA gates for pet health alerts. Support readiness and mobile telemetry severity thresholds must be signed off before beta.",
+    "team_scope": ["all"],
+    "tags": ["timeline", "launch", "beta", "support"]
+  },
+  {
+    "source_id": "SUP-42",
+    "source_type": "confluence",
+    "title": "Health alert support playbook",
+    "body": "Support needs help-center copy, escalation macros, severity definitions, and a rollback contact before proactive health alerts are exposed to customers.",
+    "team_scope": ["support"],
+    "tags": ["support", "escalation", "playbook", "alerts"]
+  },
+  {
+    "source_id": "TPM-21",
+    "source_type": "confluence",
+    "title": "Mobile alert dependency map",
+    "body": "Alert delivery depends on telemetry schema freeze, backend threshold service, mobile notification settings, QA matrix approval, and support playbook updates.",
+    "team_scope": ["tpm", "engineering", "qa", "support"],
+    "tags": ["dependency", "timeline", "owners", "notifications"]
+  },
+  {
+    "source_id": "JIRA-451",
+    "source_type": "jira",
+    "title": "Launch date compression risk",
+    "body": "The revised launch date removes two weeks from beta hardening. QA capacity is fixed for the current sprint and regression automation is not complete.",
+    "team_scope": ["qa", "tpm"],
+    "tags": ["timeline", "qa", "capacity", "release"]
+  },
+  {
+    "source_id": "GTM-18",
+    "source_type": "confluence",
+    "title": "Compressed launch messaging plan",
+    "body": "GTM launch messaging depends on final beta scope, pricing language, customer proof points, and support-approved known limitations before launch approval.",
+    "team_scope": ["gtm"],
+    "tags": ["gtm", "launch", "messaging", "approval"]
+  },
+  {
+    "source_id": "REL-9",
+    "source_type": "roadmap",
+    "title": "Beta and GA release gates",
+    "body": "Beta exit requires no Sev1 defects, launch-readiness signoff, owner map completion, and a release checklist accepted by engineering, QA, GTM, and TPM.",
+    "team_scope": ["engineering", "qa", "gtm", "tpm"],
+    "tags": ["release", "beta", "ga", "owners"]
+  },
+  {
+    "source_id": "ARCH-88",
+    "source_type": "confluence",
+    "title": "Legacy service migration architecture",
+    "body": "Legacy service migration remains blocked by fragmented subsystem ownership, incomplete traffic shadowing metrics, and unclear rollback responsibility.",
+    "team_scope": ["engineering", "tpm", "security_privacy"],
+    "tags": ["migration", "architecture", "ownership", "rollback"]
+  },
+  {
+    "source_id": "SEC-31",
+    "source_type": "jira",
+    "title": "Migration privacy and permissions review",
+    "body": "Security and privacy review must confirm service-to-service permissions, data retention behavior, audit logging, and customer data access before migration kickoff.",
+    "team_scope": ["security_privacy"],
+    "tags": ["security", "privacy", "permissions", "migration"]
+  },
+  {
+    "source_id": "SUP-64",
+    "source_type": "confluence",
+    "title": "Migration escalation readiness",
+    "body": "Support escalation playbook is not yet updated for the migration path. Tier 2 needs rollback language, incident routing, and customer-facing status copy.",
+    "team_scope": ["support"],
+    "tags": ["support", "migration", "escalation", "rollback"]
+  },
+  {
+    "source_id": "TPM-44",
+    "source_type": "confluence",
+    "title": "Migration sequencing plan",
+    "body": "The phased migration plan requires owners for account service, notification service, billing adapter, traffic ramp, incident lead, and weekly cross-team checkpoints.",
+    "team_scope": ["tpm", "engineering", "support"],
+    "tags": ["migration", "sequencing", "owners", "dependency"]
+  },
+  {
+    "source_id": "DES-12",
+    "source_type": "confluence",
+    "title": "Alert UX edge cases",
+    "body": "Design review identifies unresolved empty states, muted-alert copy, severity explanation, first-run education, and accessibility labels for mobile health alerts.",
+    "team_scope": ["design"],
+    "tags": ["design", "ux", "copy", "alerts"]
+  },
+  {
+    "source_id": "INC-2025-04",
+    "source_type": "incident",
+    "title": "Notification preference incident retrospective",
+    "body": "Prior notification preference migration caused delayed push delivery and customer confusion because rollout ownership and support escalation paths were unclear.",
+    "team_scope": ["engineering", "qa", "support", "tpm"],
+    "tags": ["incident", "notifications", "ownership", "support"]
+  },
+  {
+    "source_id": "PRIV-7",
+    "source_type": "confluence",
+    "title": "Health telemetry privacy notes",
+    "body": "Health telemetry alerts must avoid exposing sensitive inference details in push notifications and require privacy review for severity thresholds and retention.",
+    "team_scope": ["security_privacy", "engineering"],
+    "tags": ["privacy", "telemetry", "alerts", "retention"]
+  }
+]

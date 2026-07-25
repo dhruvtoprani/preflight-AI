@@ -50,7 +50,7 @@ Status: `completed 2026-05-18`
 ## Next Batch (Lean)
 
 ### Batch O - Pilot Launch Packaging
-Status: `ready to execute`
+Status: `completed 2026-07-24`
 1. Add one sample pilot runbook for PM rollout and onboarding.
 2. Add 2-3 canned demo briefs with expected outcome snapshots.
 3. Capture baseline pilot metrics: time saved, blocker detection rate, confidence trend.

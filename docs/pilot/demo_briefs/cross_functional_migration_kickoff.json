@@ -1,0 +1,10 @@
+{
+  "title": "Cross-functional migration kickoff",
+  "problem_statement": "Legacy service ownership is fragmented and migration plans are repeatedly blocked by unclear dependency maps.",
+  "proposed_solution": "Create phased migration with explicit ownership per subsystem and weekly cross-team checkpoints.",
+  "target_timeline": "Q4",
+  "affected_teams": ["engineering", "security_privacy", "support", "tpm"],
+  "success_metric": "Migrate 80% of traffic with no critical incidents",
+  "known_constraints": ["Support escalation playbook not yet updated"],
+  "requester": "pilot-pm-3"
+}

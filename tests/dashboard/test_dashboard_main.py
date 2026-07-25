@@ -4,7 +4,15 @@ import unittest
 from unittest.mock import patch
 
 import tests.bootstrap  # noqa: F401
-from dashboard_app.main import api_dashboard, api_run_detail, index, run_detail
+from dashboard_app.main import (
+    api_dashboard,
+    api_demo,
+    api_run_detail,
+    demo,
+    history,
+    index,
+    run_detail,
+)
 
 
 class DashboardTests(unittest.TestCase):
@@ -50,15 +58,41 @@ class DashboardTests(unittest.TestCase):
         self.assertEqual(result["run_id"], "abc")
         mocked.assert_called_once_with("/runs/abc")
 
-    def test_index_renders_dashboard_shell(self) -> None:
-        html = index()
+    def test_history_renders_dashboard_shell(self) -> None:
+        html = history()
         self.assertIn("PreFlight Run Dashboard", html)
         self.assertIn("/api/dashboard", html)
         self.assertIn("initiative_contains", html)
 
+    def test_index_renders_slack_demo(self) -> None:
+        html = index()
+        self.assertIn("# preflight-demo", html)
+        self.assertIn("/api/demo", html)
+        self.assertNotIn('href="/">Dashboard</a>', html)
+
+    def test_demo_api_returns_offline_scenarios(self) -> None:
+        payload = api_demo()
+
+        self.assertGreaterEqual(payload["scenario_count"], 3)
+        self.assertGreaterEqual(payload["evidence_backed_ratio"], 0.3)
+        self.assertIn("slack_message", payload["scenarios"][0])
+        self.assertIn("run", payload["scenarios"][0])
+
+    def test_demo_renders_slack_channel_shell(self) -> None:
+        html = demo()
+        self.assertIn("# preflight-demo", html)
+        self.assertIn("/api/demo", html)
+        self.assertIn("Kickoff risks, in a Slack thread.", html)
+        self.assertIn("What are we preflighting?", html)
+        self.assertIn("Health alerts launch", html)
+        self.assertIn("Parsed brief and selected", html)
+        self.assertIn("Opening #preflight-demo", html)
+        self.assertIn("Syncing source graph", html)
+        self.assertIn("Source triage", html)
+
     def test_run_detail_renders_shell(self) -> None:
         html = run_detail("run-123")
-        self.assertIn("Back to dashboard", html)
+        self.assertIn("Back to demo", html)
         self.assertIn("/api/runs/", html)
         self.assertIn("run-123", html)
 

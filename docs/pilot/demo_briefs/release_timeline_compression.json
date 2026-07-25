@@ -1,0 +1,10 @@
+{
+  "title": "Release timeline compression",
+  "problem_statement": "A strategic launch date moved earlier and current sequencing likely cannot support the new date.",
+  "proposed_solution": "Re-scope beta and GA milestones and reduce non-critical dependencies for initial release.",
+  "target_timeline": "6 weeks",
+  "affected_teams": ["engineering", "qa", "gtm", "tpm"],
+  "success_metric": "Ship beta by revised launch date with no Sev1 defects",
+  "known_constraints": ["QA capacity fixed for current sprint"],
+  "requester": "pilot-pm-2"
+}
